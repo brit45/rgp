@@ -22,6 +22,8 @@ class MainMenuState : public State {
 
     private:
     
+        void InitBackground();
+        void InitVariables();
         void InitFont();
         void InitKeyBinds();
         void InitButton();
@@ -32,6 +34,7 @@ class MainMenuState : public State {
 
         sf::Font font;
         sf::RectangleShape background;
+        sf::Texture backgroundTexture;
 
 };
 
