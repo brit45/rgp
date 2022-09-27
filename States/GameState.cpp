@@ -66,7 +66,6 @@ void GameState::endState() {
 
 void GameState::updateInput(const float &dt) {
 
-    this->checkForQuit();
 
     if(sf::Keyboard::isKeyPressed((sf::Keyboard::Key) this->keybinds.at("MOVE_UP"))) {
         
@@ -83,6 +82,10 @@ void GameState::updateInput(const float &dt) {
     else if(sf::Keyboard::isKeyPressed((sf::Keyboard::Key) this->keybinds.at("MOVE_DOWN"))) {
 
         this->player.move(dt, 0.f, 1.f);
+    }
+    else if(sf::Keyboard::isKeyPressed((sf::Keyboard::Key) this->keybinds.at("QUIT"))) {
+
+        this->quit = true;
     }
 }
 

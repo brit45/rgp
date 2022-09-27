@@ -152,8 +152,6 @@ void MainMenuState::endState() {
 
 void MainMenuState::updateInput(const float &dt) {
 
-    this->checkForQuit();
-
    
 }
 
