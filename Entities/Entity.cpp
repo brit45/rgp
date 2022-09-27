@@ -4,24 +4,46 @@
 
 Entity::Entity() {
 
-    this->shape.setFillColor(sf::Color::White);
-    this->shape.setSize(sf::Vector2f(50.f,50.f));
-    this->movementSpeed = 100.f;
+    this->InitVariables();
 }
 
-Entity::~Entity() {}
+Entity::~Entity() {
+
+    delete this->sprite;
+    delete this->texture;
+}
+
+//-------------------------------| COMPONENT FUNCTIONS
+
+void Entity::createSprite(sf::Texture *texture) {
+
+    this->texture = texture;
+    this->sprite->setTexture(*this->texture);
+    
+}
 
 //-------------------------------| FUNCTIONS
+
+void Entity::InitVariables() {
+    
+    this->texture       = NULL
+    this->sprite        = NULL;
+    this->movementSpeed = 100.0f;
+}
 
 void Entity::update(const float &dt) {}
 
 void Entity::render(sf::RenderTarget *target) {
-
-    target->draw(this->shape);
+    
+    if(this->sprite)
+        target->draw(*this->sprite);
 }
 
 void Entity::move(const float &dt, const float dir_x, const float dir_y) {
     
-    this->shape.move(dir_x * this->movementSpeed * dt, dir_y * this->movementSpeed * dt);
+    if(this->sprite) {
+
+        this->sprit->.move(dir_x * this->movementSpeed * dt, dir_y * this->movementSpeed * dt);
+    }
 }
 

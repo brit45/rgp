@@ -31,13 +31,20 @@ class Entity {
         virtual void render(sf::RenderTarget *target);
 
         virtual void move(const float &dt, const float x, const float y);
+
+        //-------------------------------| COMPONENT FUNCTIONS
+
+        void createSprite(sf::Texture *texture);
     
     protected:
 
-        sf::RectangleShape shape;
+        sf::Texture *texture;
+        sf::Sprite *sprite;
         float movementSpeed;
 
     private:
+
+        void InitVariables();
 
         //-------------------------------| VARIABLES
 
