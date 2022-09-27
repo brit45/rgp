@@ -10,7 +10,6 @@ class GameState : public State {
         GameState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states);
         virtual ~GameState();
 
-        void endState();
         void updateInput(const float &dt);
         void update(const float &dt);
         void render(sf::RenderTarget* target = NULL);        
