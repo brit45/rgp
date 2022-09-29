@@ -47,15 +47,35 @@ void GameState::InitKeyBinds() {
     ifs.close();
 }
 
+
+void GameState::InitTextures() {
+
+    sf::Texture texture;
+    texture.loadFromFile("assets/Images/Sprites/Player/Elf.png");
+
+    this->textures["PLAYER_IDLE"] = texture;
+
+}
+
+void GameState::InitPlayers() {
+
+    this->player = new Player(0,0, &this->textures["PLAYER_IDLE"]);
+}
+
 //-------------------------------| CONSTRUCTOR / DESTRUCTOR
 
 GameState::GameState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states) : 
     State(window, supportesKeys, states) {
 
         this->InitKeyBinds();
+        this->InitTextures();
+        this->InitPlayers();
     }
 
-GameState::~GameState() {}
+GameState::~GameState() {
+
+    delete this->player;
+}
 
 //-------------------------------| FUNCTIONS
 
@@ -64,19 +84,19 @@ void GameState::updateInput(const float &dt) {
 
     if(sf::Keyboard::isKeyPressed((sf::Keyboard::Key) this->keybinds.at("MOVE_UP"))) {
         
-        this->player.move(dt, 0.f, -1.f);
+        this->player->move(dt, 0.f, -1.f);
     }
     else if(sf::Keyboard::isKeyPressed((sf::Keyboard::Key) this->keybinds.at("MOVE_LEFT"))) {
 
-        this->player.move(dt, -1.f, 0.f);
+        this->player->move(dt, -1.f, 0.f);
     }
     else if(sf::Keyboard::isKeyPressed((sf::Keyboard::Key) this->keybinds.at("MOVE_RIGHT"))) {
 
-        this->player.move(dt, 1.f, 0.f);
+        this->player->move(dt, 1.f, 0.f);
     }
     else if(sf::Keyboard::isKeyPressed((sf::Keyboard::Key) this->keybinds.at("MOVE_DOWN"))) {
 
-        this->player.move(dt, 0.f, 1.f);
+        this->player->move(dt, 0.f, 1.f);
     }
     else if(sf::Keyboard::isKeyPressed((sf::Keyboard::Key) this->keybinds.at("QUIT"))) {
 
@@ -88,7 +108,7 @@ void GameState::update(const float &dt) {
     
     this->updateMousePositions();
     this->updateInput(dt);
-    this->player.update(dt);
+    this->player->update(dt);
 
 }
 
@@ -97,5 +117,5 @@ void GameState::render(sf::RenderTarget *target) {
     if(!target)
         target = this->window;
 
-    this->player.render(target);
+    this->player->render(target);
 }

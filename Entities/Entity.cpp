@@ -18,7 +18,7 @@ Entity::~Entity() {
 void Entity::createSprite(sf::Texture *texture) {
 
     this->texture = texture;
-    this->sprite->setTexture(*this->texture);
+    this->sprite = new sf::Sprite(*this->texture);
     
 }
 
@@ -26,7 +26,7 @@ void Entity::createSprite(sf::Texture *texture) {
 
 void Entity::InitVariables() {
     
-    this->texture       = NULL
+    this->texture       = NULL;
     this->sprite        = NULL;
     this->movementSpeed = 100.0f;
 }
@@ -50,7 +50,7 @@ void Entity::move(const float &dt, const float dir_x, const float dir_y) {
     
     if(this->sprite) {
 
-        this->sprit->.move(dir_x * this->movementSpeed * dt, dir_y * this->movementSpeed * dt);
+        this->sprite->move(dir_x * this->movementSpeed * dt, dir_y * this->movementSpeed * dt);
     }
 }
 

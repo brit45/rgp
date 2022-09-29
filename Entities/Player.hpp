@@ -20,6 +20,6 @@ class Player : public Entity {
 
         void InitVariables();
         void InitComponents();
-}
+};
 
 #endif //! __ENTITIES_PLAYER_HPP__
