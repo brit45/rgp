@@ -14,10 +14,15 @@ class GameState : public State {
         void update(const float &dt);
         void render(sf::RenderTarget* target = NULL);        
 
-        void InitKeyBinds();
+        
 
     private:
-        Entity player;
+    
+        void InitKeyBinds();
+        void InitTextures();
+        void InitPlayers();
+
+        Player *player;
 };
 
 #endif //! __STATES_GAMESTATE_HPP__

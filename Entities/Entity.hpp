@@ -32,6 +32,8 @@ class Entity {
 
         virtual void move(const float &dt, const float x, const float y);
 
+        virtual void setPosition(const float x, const float y);
+
         //-------------------------------| COMPONENT FUNCTIONS
 
         void createSprite(sf::Texture *texture);

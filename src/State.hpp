@@ -1,7 +1,7 @@
 #ifndef __STATE_HPP__
 #define __STATE_HPP__
 
-#include "../Entities/Entity.hpp"
+#include "../Entities/Player.hpp"
 
 class State {
 
@@ -22,7 +22,7 @@ class State {
         virtual void updateInput(const float &dt) = 0;
         virtual void update(const float &dt) = 0;
         virtual void render(sf::RenderTarget* target = NULL) = 0;
-
+        std::map<std::string,sf::Texture> textures;
     
     protected:
 
@@ -42,7 +42,6 @@ class State {
 
     private:
 
-        std::vector<sf::Texture> texture;
 };
 
 #endif // !__STATE_HPP__

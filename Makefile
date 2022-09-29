@@ -13,6 +13,7 @@ SRC=\
 	States/GameState.cpp \
 	States/MainMenuState.cpp \
 	Entities/Entity.cpp \
+	Entities/Player.cpp \
 	Ressource/Button.cpp
 	
 
