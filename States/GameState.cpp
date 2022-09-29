@@ -50,16 +50,16 @@ void GameState::InitKeyBinds() {
 
 void GameState::InitTextures() {
 
-    sf::Texture texture;
-    texture.loadFromFile("assets/Images/Sprites/Player/Elf.png");
-
-    this->textures["PLAYER_IDLE"] = texture;
+    this->textures["PLAYER_IDLE"].loadFromFile("assets/Images/Sprites/Player/Elf.png");
 
 }
 
 void GameState::InitPlayers() {
 
-    this->player = new Player(0,0, &this->textures["PLAYER_IDLE"]);
+    if(this->player = new Player(0,0, &this->textures["PLAYER_IDLE"])) {
+        
+        throw("ERROR::GAMESTATE → [ FAILED TO FOUND TEXTURE OF PLAYER_IDLE ]\n");
+    }
 }
 
 //-------------------------------| CONSTRUCTOR / DESTRUCTOR
