@@ -31,6 +31,13 @@ void Entity::InitVariables() {
     this->movementSpeed = 100.0f;
 }
 
+void Entity::setPosition(const float x, const float y) {
+
+    if(this->sprite)
+        this->sprite->setPosition(x,y);
+
+}
+
 void Entity::update(const float &dt) {}
 
 void Entity::render(sf::RenderTarget *target) {

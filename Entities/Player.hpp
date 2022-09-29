@@ -7,8 +7,19 @@ class Player : public Entity {
 
     public:
 
-        Player();
+        Player(float x, float y, sf::Texture *texture);
         virtual ~Player();
+
+        //--------------------------------------| FUNCTIONS
+    
+    private:
+
+        //--------------------------------------| VARIABLES
+
+        //--------------------------------------| INITIALISATION FUNCTIONS
+
+        void InitVariables();
+        void InitComponents();
 }
 
 #endif //! __ENTITIES_PLAYER_HPP__
