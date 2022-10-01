@@ -2,6 +2,11 @@
 
 //-------------------------------| INITIALIZER
 
+void GameState::InitVariables() {
+
+    this->player = NULL;
+}
+
 void GameState::InitKeyBinds() {
 
     std::ifstream ifs("Config/gamestate_keybinds.ini");
@@ -56,10 +61,7 @@ void GameState::InitTextures() {
 
 void GameState::InitPlayers() {
 
-    if(this->player = new Player(0,0, &this->textures["PLAYER_IDLE"])) {
-        
-        throw("ERROR::GAMESTATE → [ FAILED TO FOUND TEXTURE OF PLAYER_IDLE ]\n");
-    }
+    this->player = new Player(0,0, &this->textures["PLAYER_IDLE"]);
 }
 
 //-------------------------------| CONSTRUCTOR / DESTRUCTOR
@@ -67,6 +69,7 @@ void GameState::InitPlayers() {
 GameState::GameState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states) : 
     State(window, supportesKeys, states) {
 
+        this->InitVariables();
         this->InitKeyBinds();
         this->InitTextures();
         this->InitPlayers();

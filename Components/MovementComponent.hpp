@@ -1,5 +1,5 @@
-#ifndef __COMPONENT_MOUVEMENTCOMPONENT_HPP__
-#define __COMPONENT_MOUVEMENTCOMPONENT_HPP__
+#ifndef __COMPONENT_MOVEMENTCOMPONENT_HPP__
+#define __COMPONENT_MOVEMENTCOMPONENT_HPP__
 
 #include <iostream>
 #include <ctime>
@@ -16,12 +16,12 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 
-class MouvementComponent {
+class MovementComponent {
 
     public:
 
-        MouvementComponent(float maxVeloxity);
-        virtual ~MouvementComponent();
+        MovementComponent(float maxVeloxity);
+        virtual ~MovementComponent();
 
         //-------------------------------| FUNCTIONS
 
@@ -46,4 +46,4 @@ class MouvementComponent {
         void InitVariables();
 };
 
-#endif //! __COMPONENT_MOUVEMENTCOMPONENT_HPP__
+#endif //! __COMPONENT_MOVEMENTCOMPONENT_HPP__

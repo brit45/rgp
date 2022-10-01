@@ -18,6 +18,7 @@ class GameState : public State {
 
     private:
     
+        void InitVariables();
         void InitKeyBinds();
         void InitTextures();
         void InitPlayers();

@@ -24,7 +24,7 @@ void Entity::createSprite(sf::Texture *texture) {
 
 void Entity::createMovementComponent(float maxVelocity) {
 
-    this->movementComponen = new MouvementComponent(maxVelocity);
+    this->movementComponent = new MovementComponent(maxVelocity);
 }
 
 //-------------------------------| FUNCTIONS
@@ -53,7 +53,7 @@ void Entity::render(sf::RenderTarget *target) {
 
 void Entity::move(const float &dt, const float dir_x, const float dir_y) {
     
-    if(this->sprite && this->movementComponent) {
+    if(this->sprite  && this->movementComponent) {
         
         this->movementComponent->move(dir_x, dir_y); // Set Velocity
         this->sprite->move(this->movementComponent->getVelocity() * dt); // Use Velocity

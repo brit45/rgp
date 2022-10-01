@@ -30,7 +30,7 @@ class Entity {
 
         sf::Texture *texture;
         sf::Sprite *sprite;
-        MouvementComponent *movementComponent;
+        MovementComponent *movementComponent;
 
     private:
 

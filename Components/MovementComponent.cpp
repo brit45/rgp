@@ -1,16 +1,16 @@
 #include "MovementComponent.hpp"
 
-MouvementComponent::MouvementComponent(float maxVelocity):
+MovementComponent::MovementComponent(float maxVelocity):
     maxVelocity(maxVelocity) {}
 
-MouvementComponent::~MouvementComponent() {}
+MovementComponent::~MovementComponent() {}
 
 
 //------------------------------------------------------------| FUNCTIONS
 
-void MouvementComponent::update(const float &dt) {}
+void MovementComponent::update(const float &dt) {}
 
-void MouvementComponent::move(const float dir_x, const float dir_y) {
+void MovementComponent::move(const float dir_x, const float dir_y) {
 
     this->velocity.x = this->maxVelocity * dir_x;
     this->velocity.y = this->maxVelocity * dir_y;
@@ -18,7 +18,7 @@ void MouvementComponent::move(const float dir_x, const float dir_y) {
 
 //------------------------------------------------------------| ACCESSORS
 
-const sf::Vector2f &MouvementComponent::getVelocity() const {
+const sf::Vector2f &MovementComponent::getVelocity() const {
 
     return this->velocity;
 }
