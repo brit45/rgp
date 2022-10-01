@@ -4,7 +4,10 @@
 
 void Player::InitVariables() {}
 
-void Player::InitComponents() {}
+void Player::InitComponents() {
+
+    this->createMovementComponent(20.f);
+}
 
 //--------------------------------------| CONSTRUCTOR & DESTRUCTOR 
 

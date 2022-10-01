@@ -14,7 +14,8 @@ SRC=\
 	States/MainMenuState.cpp \
 	Entities/Entity.cpp \
 	Entities/Player.cpp \
-	Ressource/Button.cpp
+	Ressource/Button.cpp \
+	Components/MovementComponent.cpp
 	
 
 all : rpg

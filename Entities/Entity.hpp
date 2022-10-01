@@ -1,20 +1,7 @@
 #ifndef __ENTITIES_ENTITY_HPP__
 #define __ENTITIES_ENTITY_HPP__
 
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
-#include <vector>
-#include <fstream>
-#include <sstream>
-#include <stack>
-#include <map>
-
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
+#include "../Components/MovementComponent.hpp"
 
 class Entity {
 
@@ -37,12 +24,13 @@ class Entity {
         //-------------------------------| COMPONENT FUNCTIONS
 
         void createSprite(sf::Texture *texture);
+        void createMovementComponent(const float maxVelocity);
     
     protected:
 
         sf::Texture *texture;
         sf::Sprite *sprite;
-        float movementSpeed;
+        MouvementComponent *movementComponent;
 
     private:
 
