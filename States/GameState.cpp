@@ -61,7 +61,7 @@ void GameState::InitTextures() {
 
 void GameState::InitPlayers() {
 
-    this->player = new Player(0,0, &this->textures["PLAYER_IDLE"]);
+    this->player = new Player(0,0, this->textures["PLAYER_IDLE"]);
 }
 
 //-------------------------------| CONSTRUCTOR / DESTRUCTOR

@@ -3,6 +3,7 @@
 
 #include "../Components/MovementComponent.hpp"
 
+/// @brief Parent class for personnages with sprites who have textures and movements.
 class Entity {
 
     public:
@@ -23,13 +24,12 @@ class Entity {
 
         //-------------------------------| COMPONENT FUNCTIONS
 
-        void createSprite(sf::Texture *texture);
+        void setTexture(sf::Texture &texture);
         void createMovementComponent(const float maxVelocity);
     
     protected:
-
-        sf::Texture *texture;
-        sf::Sprite *sprite;
+    
+        sf::Sprite sprite;
         MovementComponent *movementComponent;
 
     private:
