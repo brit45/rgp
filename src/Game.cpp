@@ -84,7 +84,7 @@ void Game::InitWindow() {
     if(this->fullscreen)
         this->window = new sf::RenderWindow(window_bounds,title, sf::Style::Fullscreen , this->windowSettings);
     else
-        this->window = new sf::RenderWindow(window_bounds,title, sf::Style::Titlebar, this->windowSettings);
+        this->window = new sf::RenderWindow(window_bounds,title, sf::Style::Titlebar | sf::Style::Close, this->windowSettings);
 
     this->window->setFramerateLimit(framerate_limit);
     this->window->setVerticalSyncEnabled(vertical_sync_enabled);
