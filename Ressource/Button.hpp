@@ -44,7 +44,7 @@ class Button {
         void update(const sf::Vector2f mousePos);
 
         /**
-         * @brief 
+         * @brief Show button on global application.
          * 
          * @param target Draw button in global application.
          */
