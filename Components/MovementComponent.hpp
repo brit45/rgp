@@ -20,16 +20,40 @@ class MovementComponent {
 
     public:
 
+        /**
+         * @brief Construct a new Movement Component.
+         * 
+         * @param sprite Entity.
+         * @param maxVeloxity Velocity Max.
+         */
         MovementComponent(sf::Sprite &sprite, float maxVeloxity);
         virtual ~MovementComponent();
 
         //-------------------------------| FUNCTIONS
 
+        /**
+         * @brief Update of logic.
+         * 
+         * @param dt Timer of global application.
+         */
         void update(const float &dt);
+
+        /**
+         * @brief Instance of move.
+         * 
+         * @param dir_x Position on Width.
+         * @param dir_y Position on Height.
+         * @param dt Time on global application.
+         */
         void move(const float dir_x, const float dir_y, const float &dt);
 
         //-------------------------------| ACCESSORS
 
+        /**
+         * @brief Get the Velocity.
+         * 
+         * @return const sf::Vector2f& 
+         */
         const sf::Vector2f &getVelocity() const;
     
     private:
