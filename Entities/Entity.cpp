@@ -20,9 +20,9 @@ void Entity::setTexture(sf::Texture &texture) {
     
 }
 
-void Entity::createMovementComponent(float maxVelocity) {
+void Entity::createMovementComponent(float maxVelocity, const float acceleration, const float deceleration) {
 
-    this->movementComponent = new MovementComponent(this->sprite, maxVelocity);
+    this->movementComponent = new MovementComponent(this->sprite, maxVelocity, acceleration, deceleration);
 }
 
 //-------------------------------| FUNCTIONS
@@ -38,7 +38,13 @@ void Entity::setPosition(const float x, const float y) {
 
 }
 
-void Entity::update(const float &dt) {}
+void Entity::update(const float &dt) {
+
+    if(this->movementComponent) {
+
+        this->movementComponent->update(dt);
+    }
+}
 
 void Entity::render(sf::RenderTarget *target) {
 

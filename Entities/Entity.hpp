@@ -59,8 +59,10 @@ class Entity {
          * @brief Create a Movement Component.
          * 
          * @param maxVelocity Velocity Max.
+         * @param acceleration Velocity Up.
+         * @param deceleration Velocity down.
          */
-        void createMovementComponent(const float maxVelocity);
+        void createMovementComponent(const float maxVelocity, const float acceleration, const float deceleration);
     
     protected:
     

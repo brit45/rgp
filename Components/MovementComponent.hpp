@@ -26,7 +26,7 @@ class MovementComponent {
          * @param sprite Entity.
          * @param maxVeloxity Velocity Max.
          */
-        MovementComponent(sf::Sprite &sprite, float maxVeloxity);
+        MovementComponent(sf::Sprite &sprite, float maxVeloxity, float acceleration, float deceleration);
         virtual ~MovementComponent();
 
         //-------------------------------| FUNCTIONS
@@ -62,8 +62,8 @@ class MovementComponent {
 
         float           maxVelocity;
         sf::Vector2f    velocity;
-        sf::Vector2f    acceleration;
-        sf::Vector2f    deceleration;
+        float           acceleration;
+        float           deceleration;
         sf::Sprite      &sprite;
 
         //-------------------------------| INITIALIZER FUNCTIONS
