@@ -15,7 +15,8 @@ SRC=\
 	Entities/Entity.cpp \
 	Entities/Player.cpp \
 	Ressource/Button.cpp \
-	Components/MovementComponent.cpp
+	Components/MovementComponent.cpp \
+	Components/AnimationComponent.cpp
 	
 
 all : rpg
