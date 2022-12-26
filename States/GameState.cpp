@@ -2,6 +2,11 @@
 
 //-------------------------------| INITIALIZER
 
+void GameState::InitVariables() {
+
+    this->player = NULL;
+}
+
 void GameState::InitKeyBinds() {
 
     std::ifstream ifs("Config/gamestate_keybinds.ini");
@@ -47,42 +52,58 @@ void GameState::InitKeyBinds() {
     ifs.close();
 }
 
+
+void GameState::InitTextures() {
+
+    this->textures["PLAYER_IDLE"].loadFromFile("assets/Images/Sprites/Player/Elf.png");
+
+}
+
+void GameState::InitPlayers() {
+
+    this->player = new Player(0,0, this->textures["PLAYER_IDLE"]);
+}
+
 //-------------------------------| CONSTRUCTOR / DESTRUCTOR
 
 GameState::GameState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states) : 
     State(window, supportesKeys, states) {
 
+        this->InitVariables();
         this->InitKeyBinds();
+        this->InitTextures();
+        this->InitPlayers();
     }
 
-GameState::~GameState() {}
+GameState::~GameState() {
+
+    delete this->player;
+}
 
 //-------------------------------| FUNCTIONS
 
-void GameState::endState() {
-
-    std::cout << "Ending GameState!" << std::endl;
-}
-
 void GameState::updateInput(const float &dt) {
 
-    this->checkForQuit();
 
     if(sf::Keyboard::isKeyPressed((sf::Keyboard::Key) this->keybinds.at("MOVE_UP"))) {
         
-        this->player.move(dt, 0.f, -1.f);
+        this->player->move(dt, 0.f, -1.f);
     }
     else if(sf::Keyboard::isKeyPressed((sf::Keyboard::Key) this->keybinds.at("MOVE_LEFT"))) {
 
-        this->player.move(dt, -1.f, 0.f);
+        this->player->move(dt, -1.f, 0.f);
     }
     else if(sf::Keyboard::isKeyPressed((sf::Keyboard::Key) this->keybinds.at("MOVE_RIGHT"))) {
 
-        this->player.move(dt, 1.f, 0.f);
+        this->player->move(dt, 1.f, 0.f);
     }
     else if(sf::Keyboard::isKeyPressed((sf::Keyboard::Key) this->keybinds.at("MOVE_DOWN"))) {
 
-        this->player.move(dt, 0.f, 1.f);
+        this->player->move(dt, 0.f, 1.f);
+    }
+    else if(sf::Keyboard::isKeyPressed((sf::Keyboard::Key) this->keybinds.at("QUIT"))) {
+
+        this->endState();
     }
 }
 
@@ -90,7 +111,7 @@ void GameState::update(const float &dt) {
     
     this->updateMousePositions();
     this->updateInput(dt);
-    this->player.update(dt);
+    this->player->update(dt);
 
 }
 
@@ -99,5 +120,5 @@ void GameState::render(sf::RenderTarget *target) {
     if(!target)
         target = this->window;
 
-    this->player.render(target);
+    this->player->render(target);
 }

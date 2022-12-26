@@ -4,24 +4,58 @@
 
 Entity::Entity() {
 
-    this->shape.setFillColor(sf::Color::White);
-    this->shape.setSize(sf::Vector2f(50.f,50.f));
-    this->movementSpeed = 100.f;
+    this->InitVariables();
 }
 
-Entity::~Entity() {}
+Entity::~Entity() {
+
+    delete this->movementComponent;
+}
+
+//-------------------------------| COMPONENT FUNCTIONS
+
+void Entity::setTexture(sf::Texture &texture) {
+
+    this->sprite.setTexture(texture);
+    
+}
+
+void Entity::createMovementComponent(float maxVelocity, const float acceleration, const float deceleration) {
+
+    this->movementComponent = new MovementComponent(this->sprite, maxVelocity, acceleration, deceleration);
+}
 
 //-------------------------------| FUNCTIONS
 
-void Entity::update(const float &dt) {}
+void Entity::InitVariables() {
+    
+    this->movementComponent = NULL;
+}
+
+void Entity::setPosition(const float x, const float y) {
+
+    this->sprite.setPosition(x,y);
+
+}
+
+void Entity::update(const float &dt) {
+
+    if(this->movementComponent) {
+
+        this->movementComponent->update(dt);
+    }
+}
 
 void Entity::render(sf::RenderTarget *target) {
 
-    target->draw(this->shape);
+    target->draw(this->sprite);
 }
 
 void Entity::move(const float &dt, const float dir_x, const float dir_y) {
     
-    this->shape.move(dir_x * this->movementSpeed * dt, dir_y * this->movementSpeed * dt);
+    if(this->movementComponent) {
+        
+        this->movementComponent->move(dir_x, dir_y, dt); // Set Velocity
+    }
 }
 
