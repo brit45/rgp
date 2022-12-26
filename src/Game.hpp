@@ -14,12 +14,22 @@ class Game {
 
         //-------------------------------| FUNCTIONS
 
+        /// @brief Close Game Interface.
         void endApplication();
 
+        /// @brief Update SFML Events.
         void updateSFMLEvents();
+
+        /// @brief Update components system.
         void update();
+
+        /// @brief Update Timer system.
         void updateDt();
+
+        /// @brief Generate GUI interface.
         void render();
+
+        /// @brief Launch Game logic.
         void run();
     
     private:
@@ -28,6 +38,8 @@ class Game {
 
         sf::RenderWindow *window;
         std::vector<sf::VideoMode> videoModes;
+        sf::ContextSettings windowSettings;
+        bool fullscreen;
         sf::Event sfEvent;
 
         sf::Clock dtClock;
@@ -38,8 +50,16 @@ class Game {
 
         //-------------------------------| INITIALIZER FUNCTIONS
 
+        /// @brief Initialize local variable
+        void InitVariables();
+
+        /// @brief Initialize interface GUI.
         void InitWindow();
+
+        /// @brief Initialize gestion of key control.
         void InitKeys();
+
+        /// @brief Initialize initial States interfaces.
         void InitStates();
 };
 

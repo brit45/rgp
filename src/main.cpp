@@ -4,7 +4,13 @@ Game game;
 
 int main() {
 
-    game.run();
+    try {
+     
+        game.run();
+    }
+    catch(const std::exception e) {
+        std::cerr << e.what();
+    }
 
     return 0;
 
