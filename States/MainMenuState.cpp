@@ -2,28 +2,6 @@
 
 //-------------------------------| INITIALIZER
 
-void MainMenuState::InitVariables() {
-    
-}
-
-void MainMenuState::InitBackground() {
-
-    this->background.setSize(
-
-        sf::Vector2f (
-        
-            static_cast<float>(this->window->getSize().x),
-            static_cast<float>(this->window->getSize().y)
-        )
-    );
-
-    if(!this->backgroundTexture.loadFromFile("assets/Images/Backgrounds/bg1.png")) {
-        
-        throw("ERROR::MAINMENUSTATE → [ COULD NOT FOUND BACKGROUND IMAGE RESSOURCE ]\n");
-    }
-    this->background.setTexture(&this->backgroundTexture);
-}
-
 void MainMenuState::InitKeyBinds() {
 
     std::ifstream ifs("Config/gamestate_keybinds.ini");
@@ -73,7 +51,7 @@ void MainMenuState::InitFont() {
 
     if(!this->font.loadFromFile("assets/Fonts/police.ttf")) {
         
-        throw("ERROR::MAINMENUSTATE → [ COULD NOT FOUND FONT ]\n");
+        throw("ERROR::MAINMENUSTATE → [ COULD NOT FOUND FONT ]");
     }
 
 }
@@ -128,11 +106,12 @@ void MainMenuState::InitButton() {
 MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states) : 
     State(window, supportesKeys, states) {
         
-        this->InitVariables();
-        this->InitBackground();
         this->InitFont();
         this->InitKeyBinds();
         this->InitButton();
+
+        this->background.setSize(sf::Vector2f((sf::Vector2f)this->window->getSize()));
+        this->background.setFillColor(sf::Color::Magenta);
     }
 
 MainMenuState::~MainMenuState() {
@@ -145,7 +124,14 @@ MainMenuState::~MainMenuState() {
 
 //-------------------------------| FUNCTIONS
 
+void MainMenuState::endState() {
+
+    std::cout << "Ending MainMenuState!" << std::endl;
+}
+
 void MainMenuState::updateInput(const float &dt) {
+
+    this->checkForQuit();
 
    
 }
@@ -164,7 +150,7 @@ void MainMenuState::updateButton() {
 
     if(this->buttons["QUIT"]->isPressed()) {
         
-        this->endState();
+        this->quit = true;
     }
 
     if(this->buttons["CONF"]->isPressed()) {
@@ -192,25 +178,6 @@ void MainMenuState::render(sf::RenderTarget *target) {
     target->draw(this->background);
 
     this->renderButton(target);
-
-    //!               .
-    //! REMOVE LATER /!\
-    //! ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
-
-    sf::Text mouseText;
-    mouseText.setPosition(this->mousePosView.x + 30, this->mousePosView.y);
-    mouseText.setFont(this->font);
-    mouseText.setCharacterSize(12);
-    mouseText.setFillColor(sf::Color::Black);
-    std::stringstream ss;
-    ss << "\tx : " << this->mousePosView.x << "\t|\ty : " << this->mousePosView.y;
-    mouseText.setString(ss.str());
-
-    target->draw(mouseText);
-
-    //!               .
-    //! REMOVE LATER /!\
-    //! ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 }
 
 void MainMenuState::renderButton(sf::RenderTarget* target) {

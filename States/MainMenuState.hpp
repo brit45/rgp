@@ -11,6 +11,7 @@ class MainMenuState : public State {
         MainMenuState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states);
         virtual ~MainMenuState();
 
+        void endState();
         void updateButton();
         void updateInput(const float &dt);
         void update(const float &dt);
@@ -21,8 +22,6 @@ class MainMenuState : public State {
 
     private:
     
-        void InitBackground();
-        void InitVariables();
         void InitFont();
         void InitKeyBinds();
         void InitButton();
@@ -33,7 +32,6 @@ class MainMenuState : public State {
 
         sf::Font font;
         sf::RectangleShape background;
-        sf::Texture backgroundTexture;
 
 };
 

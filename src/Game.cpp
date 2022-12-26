@@ -4,88 +4,39 @@
 
 //-------------------------------| INITIALIZER FUNCTIONS
 
-void Game::InitVariables() {
-    
-    this->window        = NULL;
-    this->fullscreen    = false;
-    this->dt            = 0.f;
-}
-
 void Game::InitWindow() {
 
     std::ifstream ifs("Config/window.ini");
 
-    this->videoModes = sf::VideoMode::getFullscreenModes();
     std::string title = "None";
-    sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
-
+    sf::VideoMode window_bounds(800,600);
     unsigned framerate_limit = 120;
     bool vertical_sync_enabled = false;
 
-    unsigned antialiasing_level = 0;
-
-
     if(ifs.is_open()) {
 
-        std::string param = "";
-
-        while(ifs >> param) {
-
-            if(param == "title") {
-                
-                std::getline(ifs, title);
-                printf("Title ~> %s", title.c_str());
-            }
-            if(param == "windows_size") {
-                
-                ifs >> window_bounds.width >> window_bounds.height;
-            }
-            if(param == "frame_limit") {
-                
-                ifs >> framerate_limit;
-            }
-            if(param == "vertical_sync") {
-                
-                ifs >> vertical_sync_enabled;
-            }
-            if(param == "fullscreen") {
-                
-                ifs >> this->fullscreen;
-            }
-            if(param == "antialias_level") {
-                
-                ifs >> antialiasing_level;
-            }
-            if(param.substr(0,1) == "#" || param.substr(0,1) == ";") {
-                
-                continue;
-            }
-        }
+        std::getline(ifs, title);
+        ifs >> window_bounds.width >> window_bounds.height;
+        ifs >> framerate_limit;
+        ifs >> vertical_sync_enabled;
 
     }
     else {
 
         std::ofstream ofs("Config/window.ini");
         
-        ofs << "title\t\t" << title << std::endl;
-        ofs << "windows_size\t\t" << window_bounds.width << " " << window_bounds.height << std::endl;
-        ofs << "frame_limit\t\t" << framerate_limit << std::endl;
-        ofs << "vertical_sync\t\t" << vertical_sync_enabled << std::endl;
-        ofs << "fullscreen\t\t" << this->fullscreen << std::endl;
-        ofs << "antialias_level\t\t" << antialiasing_level;
+        ofs << title << std::endl;
+        ofs << window_bounds.width << " " << window_bounds.height << std::endl;
+        ofs << framerate_limit << std::endl;
+        ofs << vertical_sync_enabled;
+        
 
         ofs.close();
     }
 
     ifs.close();
     
-    this->windowSettings.antialiasingLevel = antialiasing_level;
-
-    if(this->fullscreen)
-        this->window = new sf::RenderWindow(window_bounds,title, sf::Style::Fullscreen , this->windowSettings);
-    else
-        this->window = new sf::RenderWindow(window_bounds,title, sf::Style::Titlebar | sf::Style::Close, this->windowSettings);
-
+    this->window = new sf::RenderWindow(window_bounds,title);
     this->window->setFramerateLimit(framerate_limit);
     this->window->setVerticalSyncEnabled(vertical_sync_enabled);
 }
@@ -135,7 +86,6 @@ void Game::InitKeys() {
 Game::Game() {
 
     this->InitKeys();
-    this->InitVariables();
     this->InitWindow();
     this->InitStates();
 }
