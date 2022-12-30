@@ -10,6 +10,7 @@ Entity::Entity() {
 Entity::~Entity() {
 
     delete this->movementComponent;
+    delete this->animationComponent;
 }
 
 //-------------------------------| COMPONENT FUNCTIONS
@@ -23,6 +24,11 @@ void Entity::setTexture(sf::Texture &texture) {
 void Entity::createMovementComponent(float maxVelocity, const float acceleration, const float deceleration) {
 
     this->movementComponent = new MovementComponent(this->sprite, maxVelocity, acceleration, deceleration);
+}
+
+void Entity::createAnimationComponent(sf::Texture &texture_sheet) {
+
+    this->animationComponent = new AnimationComponent(this->sprite, texture_sheet);
 }
 
 //-------------------------------| FUNCTIONS
@@ -40,10 +46,10 @@ void Entity::setPosition(const float x, const float y) {
 
 void Entity::update(const float &dt) {
 
-    if(this->movementComponent) {
+    // if(this->movementComponent) {
 
-        this->movementComponent->update(dt);
-    }
+    //     this->movementComponent->update(dt);
+    // }
 }
 
 void Entity::render(sf::RenderTarget *target) {

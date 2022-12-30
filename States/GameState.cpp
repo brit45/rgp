@@ -55,7 +55,7 @@ void GameState::InitKeyBinds() {
 
 void GameState::InitTextures() {
 
-    this->textures["PLAYER_IDLE"].loadFromFile("assets/Images/Sprites/Player/Elf.png");
+    this->textures["PLAYER_IDLE"].loadFromFile("assets/Images/Sprites/Player/Animations.png");
 
 }
 

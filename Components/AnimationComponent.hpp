@@ -20,12 +20,8 @@ class AnimationComponent {
 
         //-------------------------------| FUNCTIONS
 
-        void addAnimation(const std::string key);
-
-        void startAnimation(const std::string animation);
-        void pauseAnimation(const std::string animation);
-        void resetAnimation(const std::string animation);
-        void update(const float &dt);
+        void addAnimation(const std::string key, float animation_Timer, int start_frame_x, int start_frame_y, int frame_x, int frame_y, int width, int height);
+        void play(const std::string key, const float &dt);
 
     private:
 
@@ -37,8 +33,7 @@ class AnimationComponent {
 
                 //-------------------------------| FUNCTIONS
 
-                void update(const float &dt);
-                void play();
+                void play(const float &dt);;
                 void stop();
                 void reset();
 
@@ -58,7 +53,7 @@ class AnimationComponent {
 
         sf::Sprite &sprite;
         sf::Texture textureSheet;
-        std::map<std::string, Animation> animations;
+        std::map<std::string, Animation*> animations;
 
 };
 

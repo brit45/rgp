@@ -4,29 +4,37 @@ AnimationComponent::AnimationComponent(sf::Sprite &sprite, sf::Texture &texture_
     sprite(sprite),
     textureSheet(texture_sheet) {}
 
-AnimationComponent::~AnimationComponent() {}
+AnimationComponent::~AnimationComponent() {
 
-void AnimationComponent::addAnimation(const std::string key) {}
+    for(auto &i : this->animations) {
 
-void AnimationComponent::startAnimation(const std::string animation) {}
+        delete i.second;
+    }
+}
 
-void AnimationComponent::pauseAnimation(const std::string animation) {}
+void AnimationComponent::addAnimation(const std::string key, float animation_Timer, int start_frame_x, int start_frame_y, int frame_x, int frame_y, int width, int height) {
 
-void AnimationComponent::resetAnimation(const std::string animation) {}
+    this->animations[key] = new Animation(this->sprite, this->textureSheet, animation_Timer, start_frame_x, start_frame_y, frame_x, frame_y, width, height);
+}
 
-void AnimationComponent::update(const float &dt) {}
+void AnimationComponent::play(const std::string key, const float &dt) {
+
+    this->animations[key]->play(dt);
+}
 
 //------------------------------------------------------------| ANIMATE CLASS
 
-AnimationComponent::Animation::Animation(sf::Sprite &sprite, sf::Texture &textureSheet, float animation_Timer, int start_x, int start_y, int end_x, int end_y, int width, int height) : 
+AnimationComponent::Animation::Animation(sf::Sprite &sprite, sf::Texture &textureSheet, float animation_Timer, int start_frame_x, int start_frame_y, int frame_x, int frame_y, int width, int height) : 
     sprite(sprite),
     textureSheet(textureSheet),
     animationTimer(animation_Timer),
     width(width),
     height(height) {
 
-    this->startRect = sf::IntRect(start_x, start_y, width, height);
-    this->endRect = sf::IntRect(end_x, end_y, width, height);
+    this->startRect = sf::IntRect(start_frame_x * width, start_frame_y * height, width, height);
+    this->endRect = sf::IntRect(frame_x * width, frame_y * height, width, height);
+
+    this->timer = 0.0f;
 
     this->currentRect = this->startRect;
 
@@ -34,9 +42,9 @@ AnimationComponent::Animation::Animation(sf::Sprite &sprite, sf::Texture &textur
     this->sprite.setTextureRect(this->startRect);
 }
 
-void AnimationComponent::Animation::update(const float &dt) {
+void AnimationComponent::Animation::play(const float &dt) {
 
-    this->timer = 10.0f * dt;
+    this->timer += 100.0f * dt;
     
     if(this->timer >= this->animationTimer) {
 
@@ -50,11 +58,15 @@ void AnimationComponent::Animation::update(const float &dt) {
 
             this->currentRect.left = this->startRect.left;
         }
+
+        this->sprite.setTextureRect(this->currentRect);
     }
 }
 
-void AnimationComponent::Animation::play() {}
-
 void AnimationComponent::Animation::stop() {}
 
-void AnimationComponent::Animation::reset() {}
+void AnimationComponent::Animation::reset() {
+
+    this->timer = 0.0f;
+    this->currentRect = this->startRect;
+}

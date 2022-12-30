@@ -2,6 +2,7 @@
 #define __ENTITIES_ENTITY_HPP__
 
 #include "../Components/MovementComponent.hpp"
+#include "../Components/AnimationComponent.hpp"
 
 /// @brief Parent class for personnages with sprites who have textures and movements.
 class Entity {
@@ -63,11 +64,19 @@ class Entity {
          * @param deceleration Velocity down.
          */
         void createMovementComponent(const float maxVelocity, const float acceleration, const float deceleration);
+
+        /**
+         * @brief Create a Animation Component.
+         * 
+         * @param texture_sheet 
+         */
+        void createAnimationComponent(sf::Texture &texture_sheet);
     
     protected:
     
         sf::Sprite sprite;
-        MovementComponent *movementComponent;
+        MovementComponent   *movementComponent;
+        AnimationComponent  *animationComponent; 
 
     private:
 
