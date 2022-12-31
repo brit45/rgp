@@ -55,6 +55,8 @@ class MovementComponent {
          * @return const sf::Vector2f& 
          */
         const sf::Vector2f &getVelocity() const;
+
+        const bool idle() const;
     
     private:
 

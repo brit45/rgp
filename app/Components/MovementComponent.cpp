@@ -106,3 +106,10 @@ const sf::Vector2f &MovementComponent::getVelocity() const {
     return this->velocity;
 }
 
+const bool MovementComponent::idle() const {
+
+    if(this->velocity.x == 0.0f && this->velocity.y == 0.0f)
+        return true;
+    else
+        return false;
+}
