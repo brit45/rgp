@@ -7,16 +7,16 @@ OUTPUT=rpg
 
 
 SRC=\
-	src/main.cpp \
-	src/Game.cpp \
-	src/State.cpp \
-	States/GameState.cpp \
-	States/MainMenuState.cpp \
-	Entities/Entity.cpp \
-	Entities/Player.cpp \
-	Ressource/Button.cpp \
-	Components/MovementComponent.cpp \
-	Components/AnimationComponent.cpp
+	app/src/main.cpp \
+	app/src/Game.cpp \
+	app/src/State.cpp \
+	app/States/GameState.cpp \
+	app/States/MainMenuState.cpp \
+	app/Entities/Entity.cpp \
+	app/Entities/Player.cpp \
+	app/Ressource/Button.cpp \
+	app/Components/MovementComponent.cpp \
+	app/Components/AnimationComponent.cpp
 	
 
 all : rpg
