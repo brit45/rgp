@@ -34,7 +34,6 @@ void Game::InitWindow() {
             if(param == "title") {
                 
                 std::getline(ifs, title);
-                printf("Title ~> %s", title.c_str());
             }
             if(param == "windows_size") {
                 

@@ -15,6 +15,9 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+#include <libintl.h>
+
+#define  _(String) gettext(String)
 
 class MovementComponent {
 

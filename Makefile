@@ -1,5 +1,5 @@
 GCC=g++
-STD=-std=c++11
+STD=-std=c++20
 
 LIB= -L -lsfml -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio -lsfml-network
 
@@ -22,7 +22,7 @@ SRC=\
 all : rpg
 
 rpg	:
-	$(GCC) $(STD) $(SRC) $(LIB) -o BIN/$(OUTPUT)
+	$(GCC) $(STD) $(SRC)  $(LIB) -o BIN/$(OUTPUT)
 
 clean :
 	@echo "Suppresion de $(OUTPUT)"

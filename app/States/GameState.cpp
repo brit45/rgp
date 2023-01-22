@@ -69,6 +69,8 @@ void GameState::InitPlayers() {
 GameState::GameState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states) : 
     State(window, supportesKeys, states) {
 
+        std::cout << "[ INFO|DEBUG ]\t->\tCreate view of ` Party `." << std::endl;
+
         this->InitVariables();
         this->InitKeyBinds();
         this->InitTextures();
@@ -77,6 +79,7 @@ GameState::GameState(sf::RenderWindow *window, std::map<std::string, int> *suppo
 
 GameState::~GameState() {
 
+    std::cout << "[ INFO|DEBUG ]\t->\tClose view of ` Party `." << std::endl;
     delete this->player;
 }
 
