@@ -20,6 +20,7 @@ void MainMenuState::InitBackground() {
     if(!this->backgroundTexture.loadFromFile("assets/Images/Backgrounds/bg1.png")) {
         
         throw("ERROR::MAINMENUSTATE → [ COULD NOT FOUND BACKGROUND IMAGE RESSOURCE ]\n");
+        return;
     }
     this->background.setTexture(&this->backgroundTexture);
 }
@@ -71,9 +72,10 @@ void MainMenuState::InitKeyBinds() {
 
 void MainMenuState::InitFont() {
 
-    if(!this->font.loadFromFile("assets/Fonts/police.ttf")) {
+    if(!this->font.loadFromFile("assets/Fonts/Latin/police.ttf")) {
         
         throw("ERROR::MAINMENUSTATE → [ COULD NOT FOUND FONT ]\n");
+        return;
     }
 
 }
@@ -83,7 +85,7 @@ void MainMenuState::InitButton() {
     this->buttons["NEW"] =  new Button(
         {100,100},
         {150,50},
-        "New Game",
+        _("New Game"),
         &this->font,
         sf::Color(70,70,70,200),
         sf::Color(150,150,150,255),
@@ -93,17 +95,20 @@ void MainMenuState::InitButton() {
     this->buttons["CONTINUE"] =  new Button(
         {100,150},
         {150,50},
-        "Continue",
+        _("Continue"),
         &this->font,
         sf::Color(70,70,70,200),
         sf::Color(150,150,150,255),
         sf::Color(20,20,20,200)
     );
 
+    /**
+     * @translate Button of menu for show configuration panel.
+     */
     this->buttons["CONF"] =  new Button(
         {100,200},
         {150,50},
-        "Config",
+        _("Config"),
         &this->font,
         sf::Color(70,70,70,200),
         sf::Color(150,150,150,255),
@@ -113,7 +118,7 @@ void MainMenuState::InitButton() {
     this->buttons["QUIT"] =  new Button(
         {100,250},
         {150,50},
-        "EXIT",
+        _("EXIT"),
         &this->font,
         sf::Color(170,70,70,200),
         sf::Color(160,150,150,255),
@@ -127,6 +132,8 @@ void MainMenuState::InitButton() {
 
 MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states) : 
     State(window, supportesKeys, states) {
+
+        std::cout << "[ INFO|DEBUG ]\t->\tStart Game ` Menus `." << std::endl;
         
         this->InitVariables();
         this->InitBackground();
@@ -136,6 +143,8 @@ MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, int
     }
 
 MainMenuState::~MainMenuState() {
+    
+    std::cout << "[ INFO|DEBUG ]\t->\tClose view of ` Menus `." << std::endl;
 
     for(auto it = this->buttons.begin(); it != this->buttons.end(); it++) {
 
@@ -210,7 +219,7 @@ void MainMenuState::render(sf::RenderTarget *target) {
 
     //!               .
     //! REMOVE LATER /!\
-    //! ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+    //! ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 }
 
 void MainMenuState::renderButton(sf::RenderTarget* target) {

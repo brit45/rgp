@@ -11,14 +11,12 @@ Button::Button(std::array<float,2> position,std::array<float,2> size, std::strin
     this->text.setFont(*this->font);
     this->text.setString(text);
     this->text.setFillColor(sf::Color::White);
-    this->text.setOutlineThickness(1);
-    this->text.setOutlineColor(sf::Color::Red);
     this->text.setCharacterSize(16);
 
     this->text.setOrigin(
 
-        this->text.getGlobalBounds().width / 2,
-        this->text.getGlobalBounds().height / 2
+        this->text.getGlobalBounds().width / 2.f,
+        this->text.getGlobalBounds().height / 2.f
     );
 
     this->text.setPosition(

@@ -1,5 +1,5 @@
 GCC=g++
-STD=-std=c++11
+STD=-std=c++20
 
 LIB= -L -lsfml -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio -lsfml-network
 
@@ -7,21 +7,22 @@ OUTPUT=rpg
 
 
 SRC=\
-	src/main.cpp \
-	src/Game.cpp \
-	src/State.cpp \
-	States/GameState.cpp \
-	States/MainMenuState.cpp \
-	Entities/Entity.cpp \
-	Entities/Player.cpp \
-	Ressource/Button.cpp \
-	Components/MovementComponent.cpp
+	app/src/main.cpp \
+	app/src/Game.cpp \
+	app/src/State.cpp \
+	app/States/GameState.cpp \
+	app/States/MainMenuState.cpp \
+	app/Entities/Entity.cpp \
+	app/Entities/Player.cpp \
+	app/Ressource/Button.cpp \
+	app/Components/MovementComponent.cpp \
+	app/Components/AnimationComponent.cpp
 	
 
 all : rpg
 
 rpg	:
-	$(GCC) $(STD) $(SRC) $(LIB) -o BIN/$(OUTPUT)
+	$(GCC) $(STD) $(SRC)  $(LIB) -o BIN/$(OUTPUT)
 
 clean :
 	@echo "Suppresion de $(OUTPUT)"

@@ -106,3 +106,52 @@ const sf::Vector2f &MovementComponent::getVelocity() const {
     return this->velocity;
 }
 
+const bool MovementComponent::getState(const short unsigned state) const {
+
+    switch(state) {
+
+        case Movement_states::IDLE: {
+            
+            if(this->velocity.x == 0.0f && this->velocity.y == 0.0f)
+                return true;
+        
+        } break;
+
+        case Movement_states::MOVING: {
+
+            if(this->velocity.x != 0.0f && this->velocity.y != 0.0f)
+                return true;
+
+        } break;
+
+        case Movement_states::MOVING_LEFT: {
+
+            if(this->velocity.x < 0.0f)
+                return true;
+
+        } break;
+
+        case Movement_states::MOVING_RIGHT: {
+
+            if(this->velocity.x > 0.0f)
+                return true;
+
+        } break;
+
+        case Movement_states::MOVING_UP: {
+
+            if(this->velocity.y < 0.0f)
+                return true;
+
+        } break;
+
+        case Movement_states::MOVING_DOWN: {
+
+            if(this->velocity.y > 0.0f)
+                return true;
+
+        } break;
+    }
+
+    return false;
+}
