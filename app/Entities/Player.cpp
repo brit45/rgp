@@ -6,7 +6,7 @@ void Player::InitVariables() {}
 
 void Player::InitComponents() {
 
-    
+    this->createInfoComponent("Player", 0, 100, 100, 0, 100);
 }
 
 //--------------------------------------| CONSTRUCTOR & DESTRUCTOR 

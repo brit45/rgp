@@ -33,9 +33,18 @@ void Entity::createAnimationComponent(sf::Texture &texture_sheet) {
 
 //-------------------------------| FUNCTIONS
 
-void Entity::InitVariables() {
-    
+void Entity::createInfoComponent(std::string name, uint level, uint hp, uint hpM, uint exp, uint expM) {
+
+    this->infoComponent = new InfoComponent(name, level, hp, hpM, exp, expM);
+}
+
+void Entity::InitVariables() {}
+
+void Entity::InitComponents() {
+
     this->movementComponent = NULL;
+    this->animationComponent = NULL;
+    this->infoComponent = NULL;
 }
 
 void Entity::setPosition(const float x, const float y) {
@@ -44,13 +53,7 @@ void Entity::setPosition(const float x, const float y) {
 
 }
 
-void Entity::update(const float &dt) {
-
-    // if(this->movementComponent) {
-
-    //     this->movementComponent->update(dt);
-    // }
-}
+void Entity::update(const float &dt) {}
 
 void Entity::render(sf::RenderTarget *target) {
 

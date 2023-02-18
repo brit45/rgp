@@ -3,6 +3,7 @@
 
 #include "../Components/MovementComponent.hpp"
 #include "../Components/AnimationComponent.hpp"
+#include "../Components/InfoComponent.hpp"
 
 /// @brief Parent class for personnages with sprites who have textures and movements.
 class Entity {
@@ -71,16 +72,31 @@ class Entity {
          * @param texture_sheet 
          */
         void createAnimationComponent(sf::Texture &texture_sheet);
+
+        /**
+         * @brief Create a Info Component.
+         * 
+         * @param name 
+         * @param level 
+         * @param hp 
+         * @param hpM 
+         * @param exp 
+         * @param expM 
+         */
+        void createInfoComponent(std::string name, uint level, uint hp, uint hpM, uint exp, uint expM);
     
     protected:
     
         sf::Sprite sprite;
         MovementComponent   *movementComponent;
-        AnimationComponent  *animationComponent; 
+        AnimationComponent  *animationComponent;
+        InfoComponent       *infoComponent;
 
     private:
 
         void InitVariables();
+        
+        void InitComponents();
 
         //-------------------------------| VARIABLES
 
