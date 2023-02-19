@@ -22,7 +22,7 @@ const uint InfoComponent::getLevel() const {
 
 const uint InfoComponent::getHp() const {
 
-    return this->H;
+    return this->Hp;
 }
 
 const uint InfoComponent::getHpMax() const {

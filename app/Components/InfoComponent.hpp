@@ -1,12 +1,7 @@
 #ifndef __COMPONENTS_INFOCOMPONENT_HPP__
 #define __COMPONENTS_INFOCOMPONENT_HPP__
 
-#include <iostream>
-#include <cmath>
-#include <cstdlib>
-#include <vector>
-#include <string>
-
+#include "Component.inl"
 
 class InfoComponent {
 

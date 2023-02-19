@@ -16,6 +16,8 @@ SRC=\
 	app/Entities/Player.cpp \
 	app/Ressource/Button.cpp \
 	app/Components/MovementComponent.cpp \
+	app/Components/HitboxComponent.cpp \
+	app/Components/InfoComponent.cpp \
 	app/Components/AnimationComponent.cpp
 	
 

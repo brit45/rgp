@@ -3,6 +3,7 @@
 
 #include "../Components/MovementComponent.hpp"
 #include "../Components/AnimationComponent.hpp"
+#include "../Components/HitboxComponent.hpp"
 #include "../Components/InfoComponent.hpp"
 
 /// @brief Parent class for personnages with sprites who have textures and movements.
@@ -74,6 +75,17 @@ class Entity {
         void createAnimationComponent(sf::Texture &texture_sheet);
 
         /**
+         * @brief Create a Hitbox Component.
+         * 
+         * @param sprite
+         * @param offset_x 
+         * @param offset_y
+         * @param width
+         * @param height
+         */
+        void createHitboxComponent(sf::Sprite &sprite, float offset_x , float offset_y, float width, float height);
+
+        /**
          * @brief Create a Info Component.
          * 
          * @param name 
@@ -90,6 +102,7 @@ class Entity {
         sf::Sprite sprite;
         MovementComponent   *movementComponent;
         AnimationComponent  *animationComponent;
+        HitboxComponent     *hitboxcomponent;
         InfoComponent       *infoComponent;
 
     private:

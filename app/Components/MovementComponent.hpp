@@ -1,23 +1,7 @@
 #ifndef __COMPONENT_MOVEMENTCOMPONENT_HPP__
 #define __COMPONENT_MOVEMENTCOMPONENT_HPP__
 
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
-#include <vector>
-#include <fstream>
-#include <sstream>
-#include <stack>
-#include <map>
-
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
-#include <libintl.h>
-
-#define  _(String) gettext(String)
+#include "Component.inl"
 
 enum Movement_states {
     
