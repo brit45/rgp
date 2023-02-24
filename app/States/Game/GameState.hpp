@@ -1,7 +1,7 @@
 #ifndef __STATES_GAMESTATE_HPP__
 #define __STATES_GAMESTATE_HPP__
 
-#include "../src/State.hpp"
+#include "../State.hpp"
 
 class GameState : public State {
     

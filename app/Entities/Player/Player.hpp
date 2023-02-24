@@ -1,7 +1,7 @@
 #ifndef __ENTITIES_PLAYER_HPP__
 #define __ENTITIES_PLAYER_HPP__
 
-#include "Entity.hpp"
+#include "../Entity.hpp"
 
 class Player : public Entity {
 

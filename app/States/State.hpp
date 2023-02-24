@@ -1,7 +1,7 @@
 #ifndef __STATE_HPP__
 #define __STATE_HPP__
 
-#include "../Entities/Player.hpp"
+#include "../Entities/Player/Player.hpp"
 
 class State {
 

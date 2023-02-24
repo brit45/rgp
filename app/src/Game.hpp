@@ -1,7 +1,7 @@
 #ifndef __GAME__HPP__
 #define __GAME__HPP__
 
-#include "../States/MainMenuState.hpp"
+#include "../States/MainMenu/MainMenuState.hpp"
 
 class Game {
     

@@ -1,15 +1,16 @@
-#ifndef __EDITORSTATE__HPP__
-#define __EDITORSTATE__HPP__
+#ifndef __STATES_MAINMENUSTATE_HPP__
+#define __STATES_MAINMENUSTATE_HPP__
 
-#include "../src/State.hpp"
-#include "../Ressource/Button.hpp"
+#include "../Game/GameState.hpp"
+#include "../Editor/EditorState.hpp"
+#include "../../Ressource/Button.hpp"
 
-class EditorState: public State {
+class MainMenuState : public State {
 
     public:
 
-        EditorState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states);
-        virtual ~EditorState();
+        MainMenuState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states);
+        virtual ~MainMenuState();
 
         void updateButton();
         void updateInput(const float &dt);
@@ -32,8 +33,9 @@ class EditorState: public State {
         std::map<std::string, Button*>  buttons;
 
         sf::Font font;
-
+        sf::RectangleShape background;
+        sf::Texture backgroundTexture;
 
 };
 
-#endif //! __EDITORSTATE__HPP__
+#endif //! __STATES_MAINMENUSTATE_HPP__

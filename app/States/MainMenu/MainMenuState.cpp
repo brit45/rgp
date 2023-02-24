@@ -177,11 +177,8 @@ void MainMenuState::updateButton() {
     }
 
     if(this->buttons["CONF"]->isPressed()) {
-        
-        for(auto it : this->keybinds) {
 
-            std::cout << "[ CONF | KEY ]\t" << it.first << "\t-> " << it.second << std::endl;
-        }
+        this->states->push(new EditorState(this->window, this->supportedKeys, this->states));
     }
 }
 
