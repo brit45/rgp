@@ -2,7 +2,6 @@
 #define __EDITORSTATE__HPP__
 
 #include "../State.hpp"
-#include "../../Ressource/Button.hpp"
 
 class EditorState: public State {
 
@@ -30,6 +29,8 @@ class EditorState: public State {
         Button *gamestate_btn;
 
         std::map<std::string, Button*>  buttons;
+
+        Logger logger;
 
         sf::Font font;
 

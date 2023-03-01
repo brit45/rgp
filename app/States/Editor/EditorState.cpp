@@ -2,7 +2,10 @@
 
 //-------------------------------| INITIALIZER
 
-void EditorState::InitVariables() {}
+void EditorState::InitVariables() {
+
+    this->logger.setPath("Config/history.log");
+}
 
 void EditorState::InitBackground() {}
 
@@ -50,18 +53,18 @@ void EditorState::InitButton() {}
 EditorState::EditorState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states) : 
     State(window, supportesKeys, states) {
 
-        std::cout << "[ INFO|DEBUG ]\t->\tStart view ` EditorState `." << std::endl;
         
         this->InitVariables();
         this->InitBackground();
         this->InitFont();
         this->InitKeyBinds();
         this->InitButton();
+        this->logger.Info("VIEW", "Start view ` EditorState `.");
     }
 
 EditorState::~EditorState() {
     
-    std::cout << "[ INFO|DEBUG ]\t->\tClose view of ` EditorState `." << std::endl;
+    this->logger.Info("VIEW", "Close view of ` EditorState `");
 
     for(auto it = this->buttons.begin(); it != this->buttons.end(); it++) {
 

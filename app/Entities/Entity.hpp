@@ -5,6 +5,7 @@
 #include "../Components/AnimationComponent.hpp"
 #include "../Components/HitboxComponent.hpp"
 #include "../Components/InfoComponent.hpp"
+#include "../Resource/Logger.hpp"
 
 /// @brief Parent class for personnages with sprites who have textures and movements.
 class Entity {
@@ -104,6 +105,8 @@ class Entity {
         AnimationComponent  *animationComponent;
         HitboxComponent     *hitboxcomponent;
         InfoComponent       *infoComponent;
+
+        Logger log;
 
     private:
 

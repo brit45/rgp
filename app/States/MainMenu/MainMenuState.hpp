@@ -3,7 +3,7 @@
 
 #include "../Game/GameState.hpp"
 #include "../Editor/EditorState.hpp"
-#include "../../Ressource/Button.hpp"
+#include <fstream>
 
 class MainMenuState : public State {
 
@@ -35,6 +35,9 @@ class MainMenuState : public State {
         sf::Font font;
         sf::RectangleShape background;
         sf::Texture backgroundTexture;
+        
+        Logger log;
+        std::string Version_out;
 
 };
 

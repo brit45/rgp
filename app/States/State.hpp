@@ -2,6 +2,8 @@
 #define __STATE_HPP__
 
 #include "../Entities/Player/Player.hpp"
+#include "../Resource/Logger.hpp"
+#include "../Resource/Button.hpp"
 
 class State {
 

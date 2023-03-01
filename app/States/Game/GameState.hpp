@@ -23,6 +23,8 @@ class GameState : public State {
         void InitTextures();
         void InitPlayers();
 
+        Logger logger;
+
         Player *player;
 };
 

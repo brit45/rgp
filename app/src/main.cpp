@@ -1,6 +1,11 @@
 #include "Game.hpp"
+#include "../Resource/Logger.hpp"
+
+Logger logger;
 
 int main() {
+
+    logger.setPath("Config/history.log");
     
     bindtextdomain("main", "assets/Locales");
     textdomain("main");
@@ -17,7 +22,8 @@ int main() {
         check_local = (setlocale(LC_ALL, list_local[i])? true : false);
     }
 
-    std::cout << "[ INFO|LOCALE ]\t->\t" << setlocale(LC_ALL, NULL) << std::endl;
+    logger.Info("LOCALE", setlocale(LC_ALL, NULL));
+
     Game game;
     
     try {
@@ -28,7 +34,7 @@ int main() {
         std::cerr << e.what();
     }
 
-    std::cout << "[ INFO|DEBUG ]\t->\tClose programme." << std::endl;
+    logger.Info("EXIT", "Close Programme\n---------------------------------------------");
 
     return 0;
 

@@ -5,6 +5,8 @@ LIB= -L -lsfml -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio -lsfml-n
 
 OUTPUT=rpg
 
+SHELL=bash
+
 
 SRC=\
 	app/src/main.cpp \
@@ -15,29 +17,31 @@ SRC=\
 	app/States/Editor/EditorState.cpp \
 	app/Entities/Entity.cpp \
 	app/Entities/Player/Player.cpp \
-	app/Ressource/Button.cpp \
+	app/Resource/Button.cpp \
+	app/Resource/Logger.cpp \
 	app/Components/MovementComponent.cpp \
 	app/Components/HitboxComponent.cpp \
 	app/Components/InfoComponent.cpp \
 	app/Components/AnimationComponent.cpp
 	
 
-all : local_FR local_ES rpg
+all : generate_rpg
 
-rpg	:
-	@echo  "[ \033[36mGENERATE BINARY : $(OUTPUT) \t... \033[0m]"
-	@$(GCC) $(STD) $(SRC)  $(LIB) -o BIN/$(OUTPUT)
-	@echo "[ \033[32mGENERATE BINARY : \t DONE. \033[0m]"
+generate_translate : 
+	@printf "\033[36m %s\r \033[0m" "GENERATE LOCALES	...."
+	@make local_ES local_FR
+	@printf "\033[32m %s\n \033[0m" "GENERATE LOCALES	DONE"
+
+generate_rpg	:
+	@printf "\033[36m %s\r \033[0m"  "GENERATE BINARY	.... "
+	@$(GCC) $(STD) $(SRC)  $(LIB) -o BIN/$(OUTPUT);
+	@printf "\033[32m %s\n \033[0m" "GENERATE BINARY	 DONE"
 
 local_FR : 
-	@echo "[ \033[36mGENERATE LOCALES : FR \t... \033[0m]"
-	@msginit --locale=fr --input="assets/Locales/fr_FR/fr_FR.po" --output="assets/Locales/fr_FR/LC_MESSAGES/main.mo" --no-translator
-	@echo "[ \033[32mGENERATE LOCALES : \t DONE \033[0m]"
+	@msginit --locale=fr --input="assets/Locales/fr_FR/fr_FR.po" --output="assets/Locales/fr_FR/LC_MESSAGES/main.mo" --no-translator;
 
 local_ES :
-	@echo "[ \033[36mGENERATE LOCALES : ES \t... \033[0m]"
-	@msginit --locale=es --input="assets/Locales/es_ES/es_ES.po" --output="assets/Locales/es_ES/LC_MESSAGES/main.mo" --no-translator
-	@echo "[ \033[32mGENERATE LOCALES : \t DONE \033[0m]"
+	@msginit --locale=es --input="assets/Locales/es_ES/es_ES.po" --output="assets/Locales/es_ES/LC_MESSAGES/main.mo" --no-translator;
 
 clean :
 	@echo "[ \033[36mSUPPRESSION BINARY : $(OUTPUT) \t... \033[0m]"

@@ -46,7 +46,10 @@ void Entity::createInfoComponent(std::string name, uint level, uint hp, uint hpM
     this->infoComponent = new InfoComponent(name, level, hp, hpM, exp, expM);
 }
 
-void Entity::InitVariables() {}
+void Entity::InitVariables() {
+
+    this->log.setPath("Config/history.log");
+}
 
 void Entity::InitComponents() {
 

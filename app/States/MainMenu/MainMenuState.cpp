@@ -3,7 +3,8 @@
 //-------------------------------| INITIALIZER
 
 void MainMenuState::InitVariables() {
-    
+
+    this->log.setPath("Config/history.log");
 }
 
 void MainMenuState::InitBackground() {
@@ -133,18 +134,19 @@ void MainMenuState::InitButton() {
 MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states) : 
     State(window, supportesKeys, states) {
 
-        std::cout << "[ INFO|DEBUG ]\t->\tStart Game ` Menus `." << std::endl;
         
         this->InitVariables();
         this->InitBackground();
         this->InitFont();
         this->InitKeyBinds();
         this->InitButton();
+        
+        this->log.Info("VIEW", "Start Game ` Menus `.");
     }
 
 MainMenuState::~MainMenuState() {
     
-    std::cout << "[ INFO|DEBUG ]\t->\tClose view of ` Menus `." << std::endl;
+    this->log.Info("VIEW", "Close view of ` Menus `.");
 
     for(auto it = this->buttons.begin(); it != this->buttons.end(); it++) {
 
@@ -203,14 +205,25 @@ void MainMenuState::render(sf::RenderTarget *target) {
     //! REMOVE LATER /!\
     //! ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 
-    sf::Text mouseText;
-    mouseText.setPosition(this->mousePosView.x + 30, this->mousePosView.y);
-    mouseText.setFont(this->font);
-    mouseText.setCharacterSize(12);
-    mouseText.setFillColor(sf::Color::Black);
-    std::stringstream ss;
-    ss << "\tx : " << this->mousePosView.x << "\t|\ty : " << this->mousePosView.y;
-    mouseText.setString(ss.str());
+    if(this->Version_out.empty()) {
+
+        std::ifstream file_version("Config/VERSION", std::ios::binary);
+
+        this->log.Debug("VERSION", "Load VERSION file.");
+
+        file_version >> this->Version_out;
+
+        file_version.close();
+    }
+
+        sf::Text mouseText;
+        mouseText.setPosition(0, static_cast<float>(this->window->getSize().y - 20));
+        mouseText.setFont(this->font);
+        mouseText.setCharacterSize(12);
+        mouseText.setFillColor(sf::Color::Black);
+        std::stringstream ss;
+        ss << "Ver. " << this->Version_out;
+        mouseText.setString(ss.str());
 
     target->draw(mouseText);
 
