@@ -3,7 +3,8 @@
 AnimationComponent::AnimationComponent(sf::Sprite &sprite, sf::Texture &texture_sheet) :
     sprite(sprite),
     textureSheet(texture_sheet),
-    lastAnimation(NULL) {}
+    lastAnimation(NULL),
+    priorityAnimation(NULL) {}
 
 AnimationComponent::~AnimationComponent() {
 
@@ -18,22 +19,105 @@ void AnimationComponent::addAnimation(const std::string key, float animation_Tim
     this->animations[key] = new Animation(this->sprite, this->textureSheet, animation_Timer, start_frame_x, start_frame_y, frame_x, frame_y, width, height);
 }
 
-void AnimationComponent::play(const std::string key, const float &dt) {
+void AnimationComponent::play(const std::string key, const float &dt, const bool priority) {
 
-    if(this->lastAnimation != this->animations[key]) {
-        
-        if(this->lastAnimation == NULL) {
+    if(priority) {
 
-            this->lastAnimation = this->animations[key];
-        }
-        else {
-         
-            this->lastAnimation->reset();
-            this->lastAnimation = this->animations[key];
-        }
+        this->priorityAnimation = this->animations[key];
     }
 
-    this->animations[key]->play(dt);
+    if(this->priorityAnimation) {
+
+        if(this->priorityAnimation == this->animations[key]) {
+
+            if(this->lastAnimation != this->animations[key]) {
+            
+                if(this->lastAnimation == NULL) {
+
+                    this->lastAnimation = this->animations[key];
+                }
+                else {
+                
+                    this->lastAnimation->reset();
+                    this->lastAnimation = this->animations[key];
+                }
+            }
+
+            if(this->animations[key]->play(dt)) {
+
+                this->priorityAnimation = NULL;
+            }
+        }
+
+    }
+    else {
+
+        if(this->lastAnimation != this->animations[key]) {
+            
+            if(this->lastAnimation == NULL) {
+
+                this->lastAnimation = this->animations[key];
+            }
+            else {
+            
+                this->lastAnimation->reset();
+                this->lastAnimation = this->animations[key];
+            }
+        }
+
+        this->animations[key]->play(dt);
+    }
+}
+
+void AnimationComponent::play(const std::string key, const float & dt, const float & modifier, const float & modifier_max, const bool priority) {
+
+    if(priority) {
+
+        this->priorityAnimation = this->animations[key];
+    }
+
+    if(this->priorityAnimation) {
+
+        if(this->priorityAnimation == this->animations[key]) {
+
+            if(this->lastAnimation != this->animations[key]) {
+            
+                if(this->lastAnimation == NULL) {
+
+                    this->lastAnimation = this->animations[key];
+                }
+                else {
+                
+                    this->lastAnimation->reset();
+                    this->lastAnimation = this->animations[key];
+                }
+            }
+
+            if(this->animations[key]->play(dt, abs(modifier / modifier_max))) {
+
+                this->priorityAnimation = NULL;
+            }
+        }
+
+    }
+    else {
+
+        if(this->lastAnimation != this->animations[key]) {
+            
+            if(this->lastAnimation == NULL) {
+
+                this->lastAnimation = this->animations[key];
+            }
+            else {
+            
+                this->lastAnimation->reset();
+                this->lastAnimation = this->animations[key];
+            }
+        }
+
+        this->animations[key]->play(dt, abs(modifier / modifier_max));
+    }
+
 }
 
 //------------------------------------------------------------| ANIMATE CLASS
@@ -56,7 +140,9 @@ AnimationComponent::Animation::Animation(sf::Sprite &sprite, sf::Texture &textur
     this->sprite.setTextureRect(this->startRect);
 }
 
-void AnimationComponent::Animation::play(const float &dt) {
+bool AnimationComponent::Animation::play(const float &dt) {
+
+    bool done = false;
 
     this->timer += 100.0f * dt;
     
@@ -71,10 +157,42 @@ void AnimationComponent::Animation::play(const float &dt) {
         else {
 
             this->currentRect.left = this->startRect.left;
+            done = true;
         }
 
         this->sprite.setTextureRect(this->currentRect);
     }
+
+    return done;
+}
+
+bool AnimationComponent::Animation::play(const float &dt, float mod_percent) {
+    
+    bool done = false;
+
+    if(mod_percent < 0.5f)
+        mod_percent = 0.5f;
+
+    this->timer += mod_percent * 100.0f * dt;
+    
+    if(this->timer >= this->animationTimer) {
+
+        this->timer = 0.0f;
+
+        if(this->currentRect != this->endRect) {
+
+            this->currentRect.left += this->width;
+        }
+        else {
+
+            this->currentRect.left = this->startRect.left;
+            done = true;
+        }
+
+        this->sprite.setTextureRect(this->currentRect);
+    }
+
+    return done;
 }
 
 void AnimationComponent::Animation::stop() {}

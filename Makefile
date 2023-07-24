@@ -29,24 +29,24 @@ all : generate_rpg
 
 generate_translate : 
 	@printf "\033[36m %s\r \033[0m" "GENERATE LOCALES	...."
-	@make local_ES local_FR
+	@make local_ES local_FR --silent
 	@printf "\033[32m %s\n \033[0m" "GENERATE LOCALES	DONE"
 
 generate_rpg	:
-	@printf "\033[36m %s\r \033[0m"  "GENERATE BINARY	.... "
+	@printf "\033[36m %s\r \033[0m"  "GENERATE BINARY	 ...."
 	@$(GCC) $(STD) $(SRC)  $(LIB) -o BIN/$(OUTPUT);
 	@printf "\033[32m %s\n \033[0m" "GENERATE BINARY	 DONE"
 
 local_FR : 
-	@msginit --locale=fr --input="assets/Locales/fr_FR/fr_FR.po" --output="assets/Locales/fr_FR/LC_MESSAGES/main.mo" --no-translator;
+	@msgfmt -o "assets/Locales/fr_FR/LC_MESSAGES/main.mo" "assets/Locales/fr_FR/fr_FR.po"
 
 local_ES :
-	@msginit --locale=es --input="assets/Locales/es_ES/es_ES.po" --output="assets/Locales/es_ES/LC_MESSAGES/main.mo" --no-translator;
+	@msgfmt -o "assets/Locales/es_ES/LC_MESSAGES/main.mo" "assets/Locales/es_ES/es_ES.po"
 
 clean :
-	@echo "[ \033[36mSUPPRESSION BINARY : $(OUTPUT) \t... \033[0m]"
+	@printf "[ \033[36mSUPPRESSION BINARY : $(OUTPUT) \t... \033[0m]\r"
 	@rm BIN/$(OUTPUT) -fr
-	@echo "[ \033[32mSUPPRESSION BINARY : \t DONE. \033[0m]"
-	@echo "[ \033[36mSUPPRESSION LOCALES :  \t... \033[0m]"
+	@printf "[ \033[32mSUPPRESSION BINARY : \t DONE. \033[0m]"
+	@printf "[ \033[36mSUPPRESSION LOCALES :  \t... \033[0m]\r"
 	@rm assets/Locales/fr_FR/LC_MESSAGES/main.mo assets/Locales/es_ES/LC_MESSAGES/main.mo -fr
-	@echo "[ \033[32mSUPPRESSION LOCALES : \t DONE. \033[0m]"
+	@printf "[ \033[32mSUPPRESSION LOCALES : \t DONE. \033[0m]"

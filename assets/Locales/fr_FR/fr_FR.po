@@ -29,7 +29,7 @@ msgstr "Nouvelle Partie"
 
 #: States/MainMenuState.cpp:115
 msgid "Continue"
-msgstr "Charger un Partie"
+msgstr "Charger une Partie"
 
 #: States/MainMenuState.cpp:128
 msgid "Config"

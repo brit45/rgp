@@ -101,6 +101,11 @@ void MovementComponent::move(const float dir_x, const float dir_y, const float &
 
 //------------------------------------------------------------| ACCESSORS
 
+const float &MovementComponent::getMaxVelocity() const {
+    
+    return this->maxVelocity;
+}
+
 const sf::Vector2f &MovementComponent::getVelocity() const {
 
     return this->velocity;

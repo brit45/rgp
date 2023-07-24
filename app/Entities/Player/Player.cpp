@@ -2,7 +2,10 @@
 
 //--------------------------------------| INITIALISATION FUNCTIONS
 
-void Player::InitVariables() {}
+void Player::InitVariables() {
+
+    this->attacking = false;
+}
 
 void Player::InitComponents() {
 
@@ -36,7 +39,7 @@ void Player::update(const float &dt) {
 
     if(this->movementComponent->getState(MOVING_RIGHT))
         
-        this->animationComponent->play("WALK_RIGHT", dt);
+        this->animationComponent->play("WALK_RIGHT", dt, this->movementComponent->getVelocity().x, this->movementComponent->getMaxVelocity(), false);
     
     else if(this->movementComponent->getState(MOVING_LEFT))
         
@@ -48,7 +51,7 @@ void Player::update(const float &dt) {
     
     else if(this->movementComponent->getState(MOVING_DOWN))
         
-        this->animationComponent->play("WALK_DOWN", dt);
+        this->animationComponent->play("WALK_DOWN",dt);
 }
 
 //--------------------------------------| FUNCTIONS

@@ -47,6 +47,13 @@ class MovementComponent {
         //-------------------------------| ACCESSORS
 
         /**
+         * @brief Get the Max Velocity.
+         * 
+         * @return const float&
+         */
+        const float &getMaxVelocity() const;
+
+        /**
          * @brief Get the Velocity.
          * 
          * @return const sf::Vector2f& 

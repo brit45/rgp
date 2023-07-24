@@ -13,7 +13,8 @@ class AnimationComponent {
         //-------------------------------| FUNCTIONS
 
         void addAnimation(const std::string key, float animation_Timer, int start_frame_x, int start_frame_y, int frame_x, int frame_y, int width, int height);
-        void play(const std::string key, const float &dt);
+        void play(const std::string key, const float &dt, const bool priority = false);
+        void play(const std::string key, const float &dt, const float &modifier, const float &modifier_max, const bool priority = false);
 
     private:
 
@@ -25,7 +26,8 @@ class AnimationComponent {
 
                 //-------------------------------| FUNCTIONS
 
-                void play(const float &dt);;
+                bool play(const float &dt);
+                bool play(const float &dt, float mod_percent);
                 void stop();
                 void reset();
 
@@ -47,6 +49,7 @@ class AnimationComponent {
         sf::Texture textureSheet;
         std::map<std::string, Animation*> animations;
         Animation *lastAnimation;
+        Animation *priorityAnimation;
 
 };
 

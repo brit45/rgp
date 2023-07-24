@@ -18,6 +18,8 @@ class Player : public Entity {
 
         //--------------------------------------| VARIABLES
 
+        bool attacking = false;
+
         //--------------------------------------| INITIALISATION FUNCTIONS
 
         void InitVariables();
