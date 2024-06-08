@@ -18,11 +18,17 @@ SRC=\
 	Components/MovementComponent.cpp
 	
 
-all : rpg
+.PHONY: all rpg clean
 
-rpg	:
+all : BIN BIN/rpg
+
+BIN/rpg	:
 	$(GCC) $(STD) $(SRC) $(LIB) -o BIN/$(OUTPUT)
 
 clean :
 	@echo "Suppresion de $(OUTPUT)"
 	@rm BIN/$(OUTPUT)
+
+BIN:
+
+	@mkdir -p BIN
