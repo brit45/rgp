@@ -16,13 +16,16 @@ class Logger {
         void Error(std::string key, std::string message);
         void Info(std::string key, std::string message);
         void Debug(std::string key, std::string message);
+        std::string GetPath() const;
 
     private:
 
         void Save(std::string message);
+        std::ofstream ofs;
+
+    protected:
 
         std::string path_log;
-        std::ofstream ofs;
 
 };
 

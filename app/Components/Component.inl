@@ -19,6 +19,8 @@
 #include <SFML/Network.hpp>
 #include <libintl.h>
 
+#include "../Resource/Logger.hpp"
+
 #define  _(String) gettext(String)
 
 #endif //! __COMPONENTS_COMPONENT_INL__

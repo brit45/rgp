@@ -2,6 +2,7 @@
 #define __GAME__HPP__
 
 #include "../States/MainMenu/MainMenuState.hpp"
+#include "../States/Editor/EditorState.hpp"
 
 class Game {
     
@@ -47,6 +48,8 @@ class Game {
 
         std::stack<State*> states;
         std::map<std::string, int> supportedKeys;
+        
+        Logger *log = NULL;
 
         //-------------------------------| INITIALIZER FUNCTIONS
 

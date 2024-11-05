@@ -9,6 +9,8 @@ void Game::InitVariables() {
     this->window        = NULL;
     this->fullscreen    = false;
     this->dt            = 0.f;
+
+    this->log = new Logger();
 }
 
 void Game::InitWindow() {
@@ -23,6 +25,7 @@ void Game::InitWindow() {
     bool vertical_sync_enabled = false;
 
     unsigned antialiasing_level = 0;
+    std::string log_path = "Config/history.log";
 
 
     if(ifs.is_open()) {
@@ -55,6 +58,11 @@ void Game::InitWindow() {
                 
                 ifs >> antialiasing_level;
             }
+            if (param == "LOG_PATH")
+            {
+
+                ifs >> log_path;
+            }
             if(param.substr(0,1) == "#" || param.substr(0,1) == ";") {
                 
                 continue;
@@ -71,7 +79,8 @@ void Game::InitWindow() {
         ofs << "frame_limit\t\t" << framerate_limit << std::endl;
         ofs << "vertical_sync\t\t" << vertical_sync_enabled << std::endl;
         ofs << "fullscreen\t\t" << this->fullscreen << std::endl;
-        ofs << "antialias_level\t\t" << antialiasing_level;
+        ofs << "antialias_level\t\t" << antialiasing_level << std::endl;
+        ofs << "LOG_PATH\t\t" << log_path << std::endl;
 
         ofs.close();
     }
@@ -81,17 +90,22 @@ void Game::InitWindow() {
     this->windowSettings.antialiasingLevel = antialiasing_level;
 
     if(this->fullscreen)
+
         this->window = new sf::RenderWindow(window_bounds,title, sf::Style::Fullscreen , this->windowSettings);
+    
     else
-        this->window = new sf::RenderWindow(window_bounds,title, sf::Style::Titlebar | sf::Style::Close, this->windowSettings);
+    
+        this->window = new sf::RenderWindow(window_bounds,title, sf::Style::Titlebar, this->windowSettings);
 
     this->window->setFramerateLimit(framerate_limit);
     this->window->setVerticalSyncEnabled(vertical_sync_enabled);
+
+    this->log->setPath(log_path);
 }
 
 void Game::InitStates() {
-    
-    this->states.push(new MainMenuState(this->window, &this->supportedKeys, &this->states));
+
+    this->states.push(new MainMenuState(this->window, &this->supportedKeys, &this->states, this->log));
 }
 
 void Game::InitKeys() {
@@ -148,6 +162,7 @@ Game::~Game() {
         delete this->states.top();
         this->states.pop();
     }
+
 }
 
 //-------------------------------| FUNCTIONS
@@ -178,6 +193,7 @@ void Game::update() {
             this->states.top()->endState();
             
             delete this->states.top();
+
             this->states.pop();
         }
     }
@@ -208,6 +224,7 @@ void Game::render() {
 }
 
 void Game::run() {
+
 
     while(this->window->isOpen()) {
 
