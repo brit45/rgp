@@ -7,7 +7,7 @@ class GameState : public State {
     
     public:
 
-        GameState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states);
+        GameState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State *> *states, Logger *log);
         virtual ~GameState();
 
         void updateInput(const float &dt);
@@ -23,7 +23,7 @@ class GameState : public State {
         void InitTextures();
         void InitPlayers();
 
-        Logger logger;
+    protected:
 
         Player *player;
 };

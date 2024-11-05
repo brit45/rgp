@@ -4,8 +4,6 @@
 
 void GameState::InitVariables() {
 
-    this->logger.setPath("Config/history.log");
-
     this->player = NULL;
 }
 
@@ -68,20 +66,19 @@ void GameState::InitPlayers() {
 
 //-------------------------------| CONSTRUCTOR / DESTRUCTOR
 
-GameState::GameState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states) : 
-    State(window, supportesKeys, states) {
+GameState::GameState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State *> *states, Logger *log) :
+    State(window, supportesKeys, states, log) {
 
-
-        this->InitVariables();
-        this->InitKeyBinds();
-        this->InitTextures();
-        this->InitPlayers();
-        this->logger.Info("VIEW", "Create view of ` Party `.");
-    }
+    this->InitVariables();
+    this->InitKeyBinds();
+    this->InitTextures();
+    this->InitPlayers();
+    this->log->Info("VIEW", "Create view of ` Party `.");
+}
 
 GameState::~GameState() {
     
-    this->logger.Info("VIEW", "Close view of ` Party `.");
+    this->log->Info("VIEW", "Close view of ` Party `.");
     delete this->player;
 }
 

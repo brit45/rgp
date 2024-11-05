@@ -8,8 +8,7 @@
 class MainMenuState : public State {
 
     public:
-
-        MainMenuState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states);
+        MainMenuState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State *> *states, Logger *log);
         virtual ~MainMenuState();
 
         void updateButton();
@@ -18,7 +17,6 @@ class MainMenuState : public State {
         void render(sf::RenderTarget* target = NULL);
         void renderButton(sf::RenderTarget* target = NULL);
 
-        
 
     private:
     
@@ -31,12 +29,9 @@ class MainMenuState : public State {
         Button *gamestate_btn;
 
         std::map<std::string, Button*>  buttons;
-
         sf::Font font;
         sf::RectangleShape background;
         sf::Texture backgroundTexture;
-        
-        Logger log;
         std::string Version_out;
 
 };

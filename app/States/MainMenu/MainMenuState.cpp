@@ -4,7 +4,20 @@
 
 void MainMenuState::InitVariables() {
 
-    this->log.setPath("Config/history.log");
+
+    if(this->Version_out.empty()) {
+
+        std::ifstream file_version("Config/VERSION", std::ios::binary);
+
+        file_version >> this->Version_out;
+
+        file_version.close();
+    }
+
+    std::stringstream ss;
+    ss << this->Version_out;
+
+    this->log->Debug("VERSION", ss.str());
 }
 
 void MainMenuState::InitBackground() {
@@ -106,10 +119,10 @@ void MainMenuState::InitButton() {
     /**
      * @translate Button of menu for show configuration panel.
      */
-    this->buttons["CONF"] =  new Button(
+    this->buttons["EDIT"] =  new Button(
         {100,200},
         {150,50},
-        _("Config"),
+        _("Edition"),
         &this->font,
         sf::Color(70,70,70,200),
         sf::Color(150,150,150,255),
@@ -131,22 +144,21 @@ void MainMenuState::InitButton() {
 
 //-------------------------------| CONSTRUCTOR / DESTRUCTOR
 
-MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states) : 
-    State(window, supportesKeys, states) {
+MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State *> *states, Logger *log) : 
+    State(window, supportesKeys, states, log) {
 
-        
-        this->InitVariables();
-        this->InitBackground();
-        this->InitFont();
-        this->InitKeyBinds();
-        this->InitButton();
-        
-        this->log.Info("VIEW", "Start Game ` Menus `.");
-    }
+    this->InitVariables();
+    this->InitBackground();
+    this->InitFont();
+    this->InitKeyBinds();
+    this->InitButton();
+
+    this->log->Info("VIEWS", "Open Game ` Menus `.");
+}
 
 MainMenuState::~MainMenuState() {
     
-    this->log.Info("VIEW", "Close view of ` Menus `.");
+    this->log->Info("VIEWS", "Close view of ` Menus `.");
 
     for(auto it = this->buttons.begin(); it != this->buttons.end(); it++) {
 
@@ -170,7 +182,7 @@ void MainMenuState::updateButton() {
 
     if(this->buttons["NEW"]->isPressed()) {
         
-        this->states->push(new GameState(this->window, this->supportedKeys, this->states));
+        this->states->push(new GameState(this->window, this->supportedKeys, this->states, this->log));
     }
 
     if(this->buttons["QUIT"]->isPressed()) {
@@ -178,9 +190,9 @@ void MainMenuState::updateButton() {
         this->endState();
     }
 
-    if(this->buttons["CONF"]->isPressed()) {
+    if(this->buttons["EDIT"]->isPressed()) {
 
-        this->states->push(new EditorState(this->window, this->supportedKeys, this->states));
+        this->states->push(new EditorState(this->window, this->supportedKeys, this->states, this->log));
     }
 }
 
@@ -209,21 +221,22 @@ void MainMenuState::render(sf::RenderTarget *target) {
 
         std::ifstream file_version("Config/VERSION", std::ios::binary);
 
-        this->log.Debug("VERSION", "Load VERSION file.");
-
         file_version >> this->Version_out;
+
+
 
         file_version.close();
     }
 
-        sf::Text mouseText;
-        mouseText.setPosition(0, static_cast<float>(this->window->getSize().y - 20));
-        mouseText.setFont(this->font);
-        mouseText.setCharacterSize(12);
-        mouseText.setFillColor(sf::Color::Black);
-        std::stringstream ss;
-        ss << "Ver. " << this->Version_out;
-        mouseText.setString(ss.str());
+    sf::Text mouseText;
+    mouseText.setPosition(0, static_cast<float>(this->window->getSize().y - 20));
+    mouseText.setFont(this->font);
+    mouseText.setCharacterSize(12);
+    mouseText.setFillColor(sf::Color::Black);
+    std::stringstream ss;
+    ss << "Ver. " << this->Version_out;
+    mouseText.setString(ss.str());
+
 
     target->draw(mouseText);
 

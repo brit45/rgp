@@ -1,10 +1,12 @@
 #include "State.hpp"
 
-State::State(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states) {
+State::State(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State *> *states, Logger *log) {
+
     this->window = window;
     this->supportedKeys = supportesKeys;
     this->states = states;
     this->quit = false;
+    this->log = log;
 }
 
 State::~State() {}

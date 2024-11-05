@@ -17,7 +17,7 @@ class State {
         * @param supportesKeys List of keys.
         * @param states List of States.
         */
-        State(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states);
+        State(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states, Logger *log);
         virtual ~State();
 
         //-------------------------------| FUNCTIONS
@@ -87,6 +87,8 @@ class State {
         sf::Vector2f mousePosView;
 
         bool quit;
+
+        Logger *log = {};
 
 
     private:
