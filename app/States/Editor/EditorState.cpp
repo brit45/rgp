@@ -50,8 +50,8 @@ void EditorState::InitButton() {}
 
 //-------------------------------| CONSTRUCTOR / DESTRUCTOR
 
-EditorState::EditorState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states) : 
-    State(window, supportesKeys, states) {
+EditorState::EditorState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states, Logger *log) : 
+    State(window, supportesKeys, states, log) {
 
         
         this->InitVariables();

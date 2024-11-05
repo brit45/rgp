@@ -7,7 +7,7 @@ class EditorState: public State {
 
     public:
 
-        EditorState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states);
+        EditorState(sf::RenderWindow *window, std::map<std::string, int> *supportesKeys, std::stack<State*> *states, Logger *log);
         virtual ~EditorState();
 
         void updateButton();
