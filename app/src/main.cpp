@@ -1,3 +1,4 @@
+#include "version.h"
 #include "Game.hpp"
 #include "../Resource/Logger.hpp"
 
